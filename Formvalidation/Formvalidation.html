@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Set the style for the error messages */
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <form onsubmit="return validateForm()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <span id="nameError" class="error"></span>
+    <br>
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email">
+    <span id="emailError" class="error"></span>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    <span id="passwordError" class="error"></span>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    function validateForm() {
+      // Get the input elements
+      var name = document.getElementById("name");
+      var email = document.getElementById("email");
+      var password = document.getElementById("password");
+
+      // Get the error elements
+      var nameError = document.getElementById("nameError");
+      var emailError = document.getElementById("emailError");
+      var passwordError = document.getElementById("passwordError");
+
+      // Flag variable to keep track of whether form is valid
+      var valid = true;
+
+      // Validate the name field
+      if (name.value.trim() === "") {
+        nameError.textContent = "Name is required";
+        valid = false;
+      } else {
+        nameError.textContent = "";
+      }
+
+      // Validate the email field
+      if (email.value.trim() === "") {
+        emailError.textContent = "Email is required";
+        valid = false;
+      } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
+        emailError.textContent = "Invalid email address";
+        valid = false;
+      } else {
+        emailError.textContent = "";
+      }
+
+      // Validate the password field
+      if (password.value.trim() === "") {
+        passwordError.textContent = "Password is required";
+        valid = false;
+      } else if (password.value.length < 8) {
+        passwordError.textContent = "Password must be at least 8 characters long";
+        valid = false;
+      } else {
+        passwordError.textContent = "";
+      }
+
+      // Return the valid status
+      return valid;
+    }
+  </script>
+
+</body>
+</html>
+
